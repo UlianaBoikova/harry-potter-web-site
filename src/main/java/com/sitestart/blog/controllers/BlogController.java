@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.attoparser.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -30,9 +31,20 @@ public class BlogController {
         return "blog-add";
     }
 
+    @GetMapping("/test")
+    public String blogTest(Model model) {
+        return "test";
+    }
+
+    @GetMapping("/game")
+    public String blogGame(Model model) {
+        return "game";
+    }
+
     @PostMapping("/blog/add")
     public String blogPostAdd(@RequestParam String title, @RequestParam String anons, @RequestParam String full_text, Model model) {
         Post post = new Post(title, anons, full_text);
+        post.setViews(0);
         postRepository.save(post);
         return "redirect:/blog";
     }
@@ -42,6 +54,11 @@ public class BlogController {
         if (!postRepository.existsById(id)) {
              return "redirect:/blog";
         }
+        Post exactPost = postRepository.findById(id).orElseThrow();
+        System.out.println("Watching new post " + exactPost.getViews() + " " + exactPost.getTitle());
+        exactPost.newView();
+        postRepository.save(exactPost);
+        System.out.println("Watching new post " + exactPost.getViews() + " " + exactPost.getTitle());
         Optional<Post> post = postRepository.findById(id);
         ArrayList<Post> res = new ArrayList<>();
         post.ifPresent(res::add);

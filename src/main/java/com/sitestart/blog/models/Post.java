@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import org.attoparser.dom.Text;
 
 @Entity
 public class Post {
@@ -12,16 +13,23 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String title, anons, full_text;
-    private int views;
+    private String title, anons;
+    private String full_text;
+    private int views = 0;
 
     public Post(String title, String anons, String full_text) {
         this.title = title;
         this.anons = anons;
         this.full_text = full_text;
+        views++;
+    }
+
+    public void newView() {
+        views++;
     }
 
     public Post() {
+        views++;
     }
 
     public Long getId() {
