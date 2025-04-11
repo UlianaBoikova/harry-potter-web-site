@@ -139,7 +139,7 @@
 
 
 
-        .post {
+        .user {
             float: center;
             display: inline-block;
             margin: 40px 10% 40px 10%;
@@ -247,13 +247,13 @@
     </div>
 </div>
 <div class="container">
-    <div th:each="el : ${post}" class="post">
+    <div th:each="el : ${user}" class="user">
         <h3 class="article" id="title" th:text="${el.title}"></h3>
         <br>
         <p class="article" th:text="${el.full_text}"></p>
         <p class="article"><b>Views:</b> <span th:text="${el.views}"/></p>
         <button class="button" id="edit-button"><a class="button-text" th:href="'/blog/' + ${el.id} + '/edit'">Edit</a></button>
-        <form th:action="'/blog/' + ${el.id} + '/remove'" method="post">
+        <form th:action="'/blog/' + ${el.id} + '/remove'" method="user">
             <button class="button" type="submit">Delete</button>
         </form>
 

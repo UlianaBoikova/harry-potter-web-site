@@ -144,7 +144,7 @@
             color: #e7dfc8;
         }
 
-        .post {
+        .user {
             float: center;
             display: inline-block;
             width: calc(100% - 20%);
@@ -223,7 +223,7 @@
 <div class="container">
     <h1>Blog</h1>
 
-    <div th:each="el : ${posts}" class="post">
+    <div th:each="el : ${posts}" class="user">
         <h3 class="article" th:text="${el.title}"></h3>
         <p class="article" th:text="${el.anons}"></p>
         <a class="article" th:href="'/blog/' + ${el.id}"><p id="details">Details</p></a>

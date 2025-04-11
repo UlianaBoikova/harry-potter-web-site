@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h2>Добро пожаловать, <span th:text="${user.firstName}"></span>!</h2>
+    <p>Фамилия: <span th:text="${user.secondName}"></span></p>
+    <p>Пароль: <span th:text="${user.password}"></span></p>
+    <a href="/">Вернуться на главную</a>
+    <a href="/chat">Chat</a>
+</body>
+</html>

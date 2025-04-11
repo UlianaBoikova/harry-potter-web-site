@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:if="${user != null}">
+    <h2>Logged in as <span th:text="${user.firstName}">User</span></h2>
+    <h2>Logged in as <span th:text="${user.secondName}">User</span></h2>
+    <form action="/chat" method="post">
+    <label for="firstName">Имя:</label>
+    <input type="text" id="firstName" name="firstName" required><br><br>
+
+    <label for="message">Message:</label>
+    <input type="text" id="message" name="message" required><br><br>
+
+    <button type="submit" class="button"><p class="button-text">send</p></button>
+    </form>
+    <div th:each="el : ${users}" class="user">
+        <h3 class="article" th:text="${el}"></h3>
+    </div>
+
+</div>
+</body>
+</html>

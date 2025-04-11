@@ -247,8 +247,8 @@
 </div>
 <div class="container">
   <h1>Edit an article</h1>
-  <div th:each="el : ${post}">
-    <form method="post">
+  <div th:each="el : ${user}">
+    <form method="user">
       <input type="text" th:value="${el.title}" name="title" placeholder="Enter name of article" class="input-text"><br>
       <input type="text" th:value="${el.anons}" name="anons" placeholder="Enter anons" class="input-text"><br>
       <textarea type="text" name="full_text" placeholder="Enter the full text of article" class="input-textarea" th:text="${el.full_text}"></textarea><br>
