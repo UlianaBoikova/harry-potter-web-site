@@ -8,6 +8,9 @@
     <h2>Добро пожаловать, <span th:text="${user.firstName}"></span>!</h2>
     <p>Фамилия: <span th:text="${user.secondName}"></span></p>
     <p>Пароль: <span th:text="${user.password}"></span></p>
+    <img th:src="@{${user.imagePath}}" alt="User image" width="200">
+
+
     <a href="/">Вернуться на главную</a>
     <a href="/chat">Chat</a>
 </body>

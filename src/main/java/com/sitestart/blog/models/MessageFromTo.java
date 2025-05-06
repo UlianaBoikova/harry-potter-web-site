@@ -1,52 +1,95 @@
 package com.sitestart.blog.models;
 
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.*;
 
-public class MessageFromTo {
+import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+
+@Entity
+public class MessageFromTo implements Serializable, Comparable<MessageFromTo> {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String userFrom;
     private String userTo;
-    public MessageFromTo(String userFrom, String userTo) {
+
+    private String message;
+
+    private String time;
+    private String exactTime;
+
+    public MessageFromTo() {}
+
+    public MessageFromTo(String userFrom, String userTo, String message) {
         this.userFrom = userFrom;
         this.userTo = userTo;
+        this.message = message;
+        time = "yyyy.MM.dd HH:mm:ss";
+        exactTime = "HH:mm";
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public String getExactTime() {
+        return exactTime;
+    }
+
+    public void setExactTime(String exactTime) {
+        this.exactTime = exactTime;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getUserFrom() {
         return userFrom;
     }
 
-    public String getUserTo() {
-        return userTo;
-    }
-
     public void setUserFrom(String userFrom) {
         this.userFrom = userFrom;
+    }
+
+    public String getUserTo() {
+        return userTo;
     }
 
     public void setUserTo(String userTo) {
         this.userTo = userTo;
     }
 
+    public String getMessage() {
+        return message;
+    }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        MessageFromTo that = (MessageFromTo) o;
-
-        if (!userFrom.equals(that.userFrom)) return false;
-        return userTo.equals(that.userTo);
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     @Override
-    public int hashCode() {
-        int result = userFrom.hashCode();
-        result = 31 * result + userTo.hashCode();
-        return result;
-    }
-
-
     public String toString() {
-        return "From: " + getUserFrom() + "\nTo: " + getUserTo();
+        return "From: " + userFrom + " \nTo: " + userTo + "Message: " + getMessage();
+    }
+
+    @Override
+    public int compareTo(MessageFromTo o) {
+        return o.getTime().compareTo(this.getTime());
     }
 }

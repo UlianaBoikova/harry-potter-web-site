@@ -9,18 +9,51 @@
     <h2>Logged in as <span th:text="${user.firstName}">User</span></h2>
     <h2>Logged in as <span th:text="${user.secondName}">User</span></h2>
     <form action="/chat" method="post">
-    <label for="firstName">Имя:</label>
-    <input type="text" id="firstName" name="firstName" required><br><br>
+        <label for="firstName">Имя:</label>
+        <input type="text" id="firstName" name="firstName" required><br><br>
 
-    <label for="message">Message:</label>
-    <input type="text" id="message" name="message" required><br><br>
+        <label for="message">Message:</label>
+        <input type="text" id="message" name="message" required><br><br>
 
-    <button type="submit" class="button"><p class="button-text">send</p></button>
+        <button type="submit" class="button"><p class="button-text">send</p></button>
     </form>
-    <div th:each="el : ${users}" class="user">
-        <h3 class="article" th:text="${el}"></h3>
+    <h2>Messages:</h2>
+    <!-- ...
+    <ul>
+        <li th:each="msg : ${user.messengers}">
+            <strong th:text="'From: ' + ${msg.userFrom} + ' → To: ' + ${msg.userTo}"></strong>
+            <p th:text="${msg.message}"></p>
+        </li>
+    </ul>
+    -->
+    <br>
+    <div th:each="entry : ${dialogue}"
+         th:attr="data-href='/chat/' + ${entry.value.id}"
+         class="dialogue-block"
+         onclick="goToChat(this)"
+         style="cursor: pointer; border: 1px solid #ccc; padding: 10px; margin: 10px 0;">
+
+        <h3 th:text="'Диалог с: ' + ${entry.value.firstName}"></h3>
+        <img th:src="@{${entry.value.imagePath}}" alt="User image" width="200">
+        <ul>
+            <li th:each="msg : ${entry.key}">
+                <strong th:text="'From: ' + ${msg.userFrom} + ' → To: ' + ${msg.userTo}"></strong>
+                <p th:text="${msg.message} + '     ' + ${msg.exactTime}"></p>
+
+            </li>
+        </ul>
     </div>
 
 </div>
+<script>
+    function goToChat(element) {
+        const url = element.getAttribute("data-href");
+        if (url) {
+            window.location.href = url;
+        }
+    }
+    setInterval(() => window.location.reload(), 20000);
+
+</script>
 </body>
 </html>

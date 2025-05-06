@@ -1,12 +1,10 @@
 package com.sitestart.blog.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.List;
+
 
 @Entity
 public class User {
@@ -16,44 +14,34 @@ public class User {
     private Long id;
 
     private String firstName, secondName, password;
+    private String imagePath;
 
-    private HashMap<MessageFromTo, ArrayList<String>> messengers;
-
-    private ArrayList<String> messages;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<MessageFromTo> messengers = new ArrayList<>();
 
     public User(String firstName, String secondName, String password) {
         this.firstName = firstName;
         this.secondName = secondName;
         this.password = password;
-        messengers = new HashMap<>();
-        messages = new ArrayList<>();
-    }
-    public User() {
+        messengers = new ArrayList<>();
     }
 
+    public User() {}
 
-    public ArrayList<String> getMessages() {
-        return messages;
+
+
+    public String getImagePath() {
+        return imagePath;
     }
 
-    public void setMessages(ArrayList<String> messages) {
-        this.messages = messages;
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 
-    public void addANewMessage() {
 
-    }
-
-    public void addMessage(String message) {
-        messages.add(message);
-    }
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getFirstName() {
@@ -68,14 +56,27 @@ public class User {
         return password;
     }
 
-    public HashMap<MessageFromTo, ArrayList<String>> getMessengers() {
+    public List<MessageFromTo> getMessengers() {
         return messengers;
     }
-    public void refactor(MessageFromTo messageFromTo, String message) {
-        ArrayList<String> messages = messengers.get(messageFromTo);
-        messages.add(message);
-        messengers.replace(messageFromTo, messages);
+
+    public List<String> findAllCompanions(String currentUser) {
+        List<String> companions = new ArrayList<>();
+        for (MessageFromTo message : getMessengers()) {
+            if (message.getUserFrom().equals(currentUser)) {
+                if (!companions.contains(message.getUserTo())) {
+                    companions.add(message.getUserTo());
+                }
+            } else if (message.getUserTo().equals(currentUser)) {
+                if (!companions.contains(message.getUserFrom())) {
+                    companions.add(message.getUserFrom());
+                }
+            }
+        }
+        return companions;
     }
+
+
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
@@ -89,7 +90,25 @@ public class User {
         this.password = password;
     }
 
-    public void setMessengers(HashMap<MessageFromTo, ArrayList<String>> messengers) {
+    public ArrayList<MessageFromTo> findDialogueWith(String userName) {
+        ArrayList<MessageFromTo> usersList = new ArrayList<>();
+        for(MessageFromTo user: getMessengers()) {
+            if (user.getUserFrom().equals(userName) || user.getUserTo().equals(userName)) usersList.add(user);
+        }
+        return usersList;
+    }
+
+    public MessageFromTo findLastMessageWith(String userName) {
+        ArrayList<MessageFromTo> usersList = new ArrayList<>();
+        for(MessageFromTo user: getMessengers()) {
+            if (user.getUserFrom().equals(userName) || user.getUserTo().equals(userName)) usersList.add(user);
+        }
+        return usersList.get(usersList.size() - 1);
+    }
+
+
+
+    public void setMessengers(ArrayList<MessageFromTo> messengers) {
         this.messengers = messengers;
     }
 }
