@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+    <style>
+                @import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Dosis:wght@200..800&family=Handlee&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Sigmar&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background: #e7dfc8;
+        }
+
+        html, body {
+            height: calc(100%);
+        }
+
+        #blog-name {
+            color: #e7dfc8;
+            float: right;
+            text-align: left;
+            font-size: 25px;
+            font-style: normal;
+            font-weight: bold;
+            font-family:  "Handlee", serif;
+            text-transform: capitalize;
+            line-height: 100px;
+            padding: 0px;
+            margin: 0px 20px 0px 20px;
+        }
+
+        #header {
+            position: relative;
+            background: rgba(25, 28, 43); /* Темный фон для навигации */
+            opacity: 1;
+            height: 100px;
+            width: 100%;
+            display: block; /* Прозрачность для навигационного блока */
+            z-index: 2;
+        }
+
+        .navbar {
+          overflow: hidden;
+          background-color: #191c2b;
+          font-family:   "Handlee", serif;
+        }
+
+        /* Ссылки в панели навигации */
+        .navbar a {
+          float: left;
+          font-size: 16px;
+          color: #e7dfc8;
+          text-align: center;
+          text-decoration: none;
+        }
+
+        /* Выпадающий контейнер */
+        .dropdown {
+          float: left;
+          overflow: hidden;
+        }
+
+        /* Кнопка выпадающего списка */
+        .dropdown .dropbtn {
+          font-size: 16px;
+          outline: none;
+          color: #e7dfc8;
+          padding: 14px 16px;
+          background-color: #191c2b;
+          font-family: inherit; /* Важно для вертикального выравнивания на мобильных телефонах */
+           /* Важно для вертикального выравнивания на мобильных телефонах */
+        }
+
+
+
+        .dropbtn {
+            background-image: url(https://www.citypng.com/public/uploads/preview/transparent-hd-white-menu-burger-icon-701751695037039ulxnzxwywi.png);
+            background-size: contain;    /* Масштабирует изображение, чтобы оно поместилось в элемент */
+            background-repeat: no-repeat; /* Изображение не будет повторяться */
+            background-position: center;  /* Центрируем изображение внутри элемента */
+            text-decoration: underline;
+            width: 50px;  /* Устанавливаем размер кнопки */
+            height: 50px;
+        }
+
+        .dropbtn, .navbar button {
+            outline: none;  /* Убираем обводку при фокусе */
+            border: none;   /* Убираем рамку, если она есть */
+        }
+
+        /* Добавить красный цвет фона для ссылок на навигационную панель при наведении курсора */
+        .navbar a:hover, .dropdown:hover .dropbtn {
+          background-color: #3c829b;
+        }
+
+        /* Выпадающее содержимое (скрыто по умолчанию) */
+        .dropdown-content {
+          display: none;
+          position: absolute;
+          background-color: #3c829b;
+          min-width: 160px;
+          box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+          z-index: 1;
+        }
+
+        /* Ссылки внутри выпадающего списка */
+        .dropdown-content a {
+          float: none;
+          color: #e7dfc8;
+          padding: 12px 16px;
+          background-color
+          text-decoration: none;
+          display: block;
+          text-align: left;
+        }
+
+        /* Добавить серый цвет фона для выпадающих ссылок при наведении курсора */
+        .dropdown-content a:hover {
+          background-color: #355a6d;
+        }
+
+        /* Показать выпадающее меню при наведении курсора */
+        .dropdown:hover .dropdown-content {
+          display: block;
+        }
+
+        .blog-main {
+            background-color: #386173;
+            color: #050266;
+            font-family: "Noto Sans", serif;
+            font-optical-sizing: auto;
+            font-size: 20px;
+            text-align: left;
+            margin: 10px 20% 10px 20%;
+        }
+
+        h1 {
+            margin: 30px 10% 0px 10%;
+            font-family:   "Handlee", serif;
+            font-size: 40px;
+            text-align: left;
+            color: rgba(25, 28, 43);
+        }
+
+
+        #main {
+            background-color: #386173;
+        }
+
+        .container {
+            min-height: calc(100% - 400px);
+        }
+
+
+
+
+        .question:first-of-type {
+          display: flex;
+          align-items: flex-start;
+          flex-direction: column;
+          margin-bottom: 5px;
+        }
+
+        .choise {
+            display: flex;
+            align-items: flex-start;
+            margin: 10px 5% 10px 5%;
+        }
+
+        form {
+          margin: 40px 10% 20px 10%;
+        }
+
+        label {
+          margin: 0;
+          line-height: 32px;
+        }
+
+        input {
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          appearance: none;
+
+          border-radius: 50%;
+          width: 16px;
+          height: 16px;
+
+          border: 2px solid #999;
+          transition: 0.2s all linear;
+          outline: none;
+          margin-right: 5px;
+
+          position: relative;
+          top: 4px;
+
+
+        }
+
+        input:checked {
+          border: 6px solid rgba(25, 28, 43);
+        }
+
+        .buttonTest,
+        legend {
+          font-size: 20px;
+          font-family:   "Handlee", serif;
+          color: #e7dfc8;
+          background-color: rgba(25, 28, 43);
+          background-radius: 5px;
+          padding: 5px 10px;
+          border-radius: 5px;
+        }
+
+        .buttonTest:hover,
+        .buttonTest:focus {
+          color: #999;
+        }
+
+        .buttonTest {
+            margin: 40px 10% 20px 10%;
+        }
+
+        .buttonTest:active {
+          background-color: #e7dfc8;
+          color: rgba(25, 28, 43);
+          outline: 1px solid rgba(25, 28, 43);
+        }
+
+
+
+
+
+        #footer {
+            position: absolute;
+            padding: 100px;
+            background: #191c2b;
+            color: #e7dfc8;
+            text-align: left;
+            font-size: 20px;
+            font-style: normal;
+            font-family: "Noto Sans", serif;
+            font-optical-sizing: auto;
+            height: 100px;
+            width: 100%;
+            border-top: 4px solid rgba(25, 28, 43);
+        }
+
+        #contacts {
+            font-family:   "Handlee", serif;
+            color: #e7dfc8;
+        }
+    </style>
+</head>
+<body>
+<div id="header">
+    <div class="navbar">
+        <p id="blog-name">Magic of Harry Potter</p>
+        <div class="dropdown">
+            <button class="dropbtn"></button>
+            <div class="dropdown-content">
+                <a href="/">Main</a>
+                <a href="/blog">Blog</a>
+                <a href="/blog/add">Add a new article</a>
+                <a href="/test">Find your house</a>
+                <a href="/game">Game</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <h1>Test</h1>
+    <form>
+        <fieldset>
+            <legend>What would be your favorite subjects at Hogwarts?</legend>
+            <div class="question">
+                <div class="choice">
+                    <input
+                            type="radio"
+                            id="hufflepuff-question-1"
+                            name="question-1"
+                            value="hufflepuff-question-1"
+                            checked />
+                    <label for="hufflepuff-question-1">Herbology</label>
+                </div>
+
+                <div class="choice">
+                    <input
+                            type="radio"
+                            id="ravenclaw-question-1"
+                            name="question-1"
+                            value="ravenclaw-question-1"
+                            >
+                    <label for="ravenclaw-question-1">Transfiguration</label>
+                </div>
+
+                <div class="choice">
+                    <input
+                            type="radio"
+                            id="slytherin-question-1"
+                            name="question-1"
+                            value="slytherin-question-1"
+                            >
+                    <label for="slytherin-question-1">Potions</label>
+                </div>
+
+                <div class="choice">
+                    <input
+                            type="radio"
+                            id="gryffindor-question-1"
+                            name="question-1"
+                            value="gryffindor-question-1"
+                            >
+                    <label for="gryffindor-question-1">Defense Against the Dark Arts</label>
+                </div>
+            </div>
+
+        </fieldset>
+    </form>
+
+
+
+
+    <form>
+        <fieldset>
+            <legend>Imagine the situation: you are attacked by a troll, your friend is so terrified that he can't move. The troll is already moving towards him, what will you do?</legend>
+            <div class="question">
+
+                <div class="choice">
+                    <input
+                            type="radio"
+                            id="gryffindor-question-2"
+                            name="question-2"
+                            value="gryffindor-question-2"
+                            checked />
+                    <label for="gryffindor-question-2">I'll grab my friend and try to run away, despite the danger</label>
+                </div>
+
+                <div class="choice">
+                    <input
+                            type="radio"
+                            id="hufflepuff-question-2"
+                            name="question-2"
+                            value="hufflepuff-question-2"
+                            >
+                    <label for="hufflepuff-question-2">I'll try to find a common language with the troll, I once heard that they can be friendly</label>
+                </div>
+
+                <div class="choice">
+                    <input
+                            type="radio"
+                            id="ravenclaw-question-2"
+                            name="question-2"
+                            value="ravenclaw-question-2"
+                            >
+                    <label for="ravenclaw-question-2">I'll run to the side and try to remember the necessary spell, wasting time</label>
+                </div>
+
+                <div class="choice">
+                    <input
+                            type="radio"
+                            id="slytherin-question-2"
+                            name="question-2"
+                            value="slytherin-question-2"
+                            >
+                    <label for="slytherin-question-2">I'll run to a safe place, I'm unlikely to remember the spell, but luckily there is a strong echo here, so I'll scream until the troll moves away from my friend, besides, the troll definitely won't find me here</label>
+                </div>
+
+            </div>
+        </fieldset>
+    </form>
+
+
+
+    <form>
+        <fieldset>
+            <legend>What do you value most in people?</legend>
+            <div class="question">
+
+                <div class="choice">
+                    <input
+                            type="radio"
+                            id="ravenclaw-question-3"
+                            name="question-3"
+                            value="ravenclaw-question-3"
+                            checked />
+                    <label for="ravenclaw-question-3">Intelligence and education</label>
+                </div>
+
+                <div class="choice">
+                    <input
+                            type="radio"
+                            id="hufflepuff-question-3"
+                            name="question-3"
+                            value="hufflepuff-question-3"
+                            >
+                    <label for="hufflepuff-question-3">Hardworking and friendly</label>
+                </div>
+
+                <div class="choice">
+                    <input
+                            type="radio"
+                            id="gryffindor-question-3"
+                            name="question-3"
+                            value="gryffindor-question-3"
+                            >
+                    <label for="gryffindor-question-3">Courage and loyalty</label>
+                </div>
+
+                <div class="choice">
+                    <input
+                            type="radio"
+                            id="slytherin-question-3"
+                            name="question-3"
+                            value="slytherin-question-3"
+                    >
+                    <label for="slytherin-question-3">Cunning and ambitious</label>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+
+
+
+
+    <form>
+        <fieldset>
+            <legend>Which of these ghosts do you like best?</legend>
+            <div class="question">
+                <div class="choice">
+                    <input
+                            type="radio"
+                            id="hufflepuff-question-4"
+                            name="question-4"
+                            value="hufflepuff-question-4"
+                            checked />
+                    <label for="hufflepuff-question-4">Fat Monk</label>
+                </div>
+
+                <div class="choice">
+                    <input
+                            type="radio"
+                            id="ravenclaw-question-4"
+                            name="question-4"
+                            value="ravenclaw-question-4"
+                            >
+                    <label for="ravenclaw-question-4">Gray Lady</label>
+                </div>
+
+                <div class="choice">
+                    <input
+                            type="radio"
+                            id="slytherin-question-4"
+                            name="question-4"
+                            value="slytherin-question-4"
+                            >
+                    <label for="slytherin-question-4">Bloody Baroe</label>
+                </div>
+
+                <div class="choice">
+                    <input
+                            type="radio"
+                            id="gryffindor-question-4"
+                            name="question-4"
+                            value="gryffindor-question-4"
+                            >
+                    <label for="gryffindor-question-4">Nearly Headless Nick</label>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+
+
+
+    <form>
+        <fieldset>
+            <legend>Which faculty would you like to enroll in?</legend>
+            <div class="question">
+                <div class="choice">
+                    <input
+                            type="radio"
+                            id="hufflepuff-question-5"
+                            name="question-5"
+                            value="hufflepuff-question-5"
+                            checked />
+                    <label for="hufflepuff-question-5">Hufflepuff</label>
+                </div>
+
+                <div class="choice">
+                    <input
+                            type="radio"
+                            id="ravenclaw-question-5"
+                            name="question-5"
+                            value="ravenclaw-question-5"
+                            >
+                    <label for="ravenclaw-question-5">Ravenclaw</label>
+                </div>
+
+                <div class="choice">
+                    <input
+                            type="radio"
+                            id="slytherin-question-5"
+                            name="question-5"
+                            value="slytherin-question-5"
+                            >
+                    <label for="slytherin-question-5">Slytherin</label>
+                </div>
+
+                <div class="choice">
+                    <input
+                            type="radio"
+                            id="gryffindor-question-5"
+                            name="question-5"
+                            value="gryffindor-question-5"
+                            >
+                    <label for="gryffindor-question-5">Gryffindor</label>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+
+
+    <form>
+        <fieldset>
+            <legend>What would Amortentia smell like to you from the following?</legend>
+            <div class="question">
+                <div class="choice">
+                    <input
+                            type="radio"
+                            id="hufflepuff-question-6"
+                            name="question-6"
+                            value="hufflepuff-question-6"
+                            checked />
+                    <label for="hufflepuff-question-6">Wet asphalt after rain</label>
+                </div>
+
+
+                <div class="choice">
+                    <input
+                            type="radio"
+                            id="slytherin-question-6"
+                            name="question-6"
+                            value="slytherin-question-6"
+                    >
+                    <label for="slytherin-question-6">Peppermint toothpaste</label>
+                </div>
+
+                <div class="choice">
+                    <input
+                            type="radio"
+                            id="gryffindor-question-6"
+                            name="question-6"
+                            value="gryffindor-question-6"
+                    >
+                    <label for="gryffindor-question-6">Smoke and fire</label>
+                </div>
+
+
+                <div class="choice">
+                    <input
+                            type="radio"
+                            id="ravenclaw-question-6"
+                            name="question-6"
+                            value="ravenclaw-question-6"
+                    >
+                    <label for="ravenclaw-question-6">Fresh parchment and ink</label>
+                </div>
+
+            </div>
+        </fieldset>
+    </form>
+
+
+    <form>
+        <fieldset>
+            <legend>What books attract you?</legend>
+            <div class="question">
+
+                <div class="choice">
+                    <input
+                            type="radio"
+                            id="gryffindor-question-7"
+                            name="question-7"
+                            value="gryffindor-question-7"
+                            checked />
+                    <label for="gryffindor-question-7">Adventure and fantasy</label>
+                </div>
+
+                <div class="choice">
+                    <input
+                            type="radio"
+                            id="hufflepuff-question-7"
+                            name="question-7"
+                            value="hufflepuff-question-7"
+                            >
+                    <label for="hufflepuff-question-7">Romance and comedy</label>
+                </div>
+
+                <div class="choice">
+                    <input
+                            type="radio"
+                            id="ravenclaw-question-7"
+                            name="question-7"
+                            value="ravenclaw-question-7"
+                    >
+                    <label for="ravenclaw-question-7">Scientific literature</label>
+                </div>
+
+                <div class="choice">
+                    <input
+                            type="radio"
+                            id="slytherin-question-7"
+                            name="question-7"
+                            value="slytherin-question-7"
+                    >
+                    <label for="slytherin-question-7">Books on career development</label>
+                </div>
+
+            </div>
+        </fieldset>
+    </form>
+
+
+    <form>
+        <fieldset>
+            <legend>What would be the best gift for you?</legend>
+            <div class="question">
+
+
+                <div class="choice">
+                    <input
+                            type="radio"
+                            id="slytherin-question-8"
+                            name="question-8"
+                            value="slytherin-question-8"
+                            checked
+                    />
+                    <label for="slytherin-question-8">Rare historical artifact</label>
+                </div>
+
+                <div class="choice">
+                    <input
+                            type="radio"
+                            id="hufflepuff-question-8"
+                            name="question-8"
+                            value="hufflepuff-question-8">
+                    <label for="hufflepuff-question-8">Some unusual plant</label>
+                </div>
+
+                <div class="choice">
+                    <input
+                            type="radio"
+                            id="ravenclaw-question-8"
+                            name="question-8"
+                            value="ravenclaw-question-8"
+                    >
+                    <label for="ravenclaw-question-8">Book</label>
+                </div>
+
+                <div class="choice">
+                    <input
+                            type="radio"
+                            id="gryffindor-question-8"
+                            name="question-8"
+                            value="gryffindor-question-8"
+                    >
+                    <label for="gryffindor-question-8">Bow and arrows</label>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+
+
+    <form>
+        <fieldset>
+            <legend>Which minor character did you dislike the most from the book?</legend>
+            <div class="question">
+                <div class="choice">
+                    <input
+                            type="radio"
+                            id="hufflepuff-question-9"
+                            name="question-9"
+                            value="hufflepuff-question-9"
+                            checked />
+                    <label for="hufflepuff-question-9">Zachariah Smith</label>
+                </div>
+
+
+                <div class="choice">
+                    <input
+                            type="radio"
+                            id="gryffindor-question-9"
+                            name="question-9"
+                            value="gryffindor-question-9"
+                    >
+                    <label for="gryffindor-question-9">Cormac McLlaghen</label>
+                </div>
+
+                <div class="choice">
+                    <input
+                            type="radio"
+                            id="ravenclaw-question-9"
+                            name="question-9"
+                            value="ravenclaw-question-9"
+                    >
+                    <label for="ravenclaw-question-9">Marietta Edgecombe</label>
+                </div>
+
+                <div class="choice">
+                    <input
+                            type="radio"
+                            id="slytherin-question-9"
+                            name="question-9"
+                            value="slytherin-question-9"
+                    >
+                    <label for="slytherin-question-9">Pansy Parkinson</label>
+                </div>
+
+            </div>
+        </fieldset>
+    </form>
+
+
+    <div>
+        <button class="buttonTest" type="button" onclick="findYourHouse()">Submit</button>
+    </div>
+
+
+    <h1>Result:</h1>
+    <img id="resultImage" src="" alt="" style="width: 40%; margin: 20px 30% 20px 30%">
+
+    <script>
+        function findYourHouse() {
+            // Проверяем, какая радиокнопка выбрана
+            var selectedRadio1 = document.querySelector('input[name="question-1"]:checked');
+            var selectedValue1 = selectedRadio1.value;
+
+            var selectedRadio2 = document.querySelector('input[name="question-2"]:checked');
+            var selectedValue2 = selectedRadio2.value;
+
+            var selectedRadio3 = document.querySelector('input[name="question-3"]:checked');
+            var selectedValue3 = selectedRadio3.value;
+
+            var selectedRadio4 = document.querySelector('input[name="question-4"]:checked');
+            var selectedValue4 = selectedRadio4.value;
+
+            var selectedRadio5 = document.querySelector('input[name="question-5"]:checked');
+            var selectedValue5 = selectedRadio5.value;
+
+            var selectedRadio6 = document.querySelector('input[name="question-6"]:checked');
+            var selectedValue6 = selectedRadio6.value;
+
+            var selectedRadio7 = document.querySelector('input[name="question-7"]:checked');
+            var selectedValue7 = selectedRadio7.value;
+
+            var selectedRadio8 = document.querySelector('input[name="question-8"]:checked');
+            var selectedValue8 = selectedRadio8.value;
+
+            var selectedRadio9 = document.querySelector('input[name="question-9"]:checked');
+            var selectedValue9 = selectedRadio9.value;
+
+            let questions = [selectedValue1, selectedValue2, selectedValue3, selectedValue4, selectedValue5,
+            selectedValue6, selectedValue7, selectedValue8, selectedValue9];
+
+            var img = document.getElementById("resultImage");
+            var total = 9;
+            var gryffindor = 0;
+            var slytherin = 0;
+            var ravenclaw = 0;
+            var hufflepuff = 0;
+
+
+            // Устанавливаем картинку в зависимости от выбранного значения
+
+            for (let i = 0; i < 9; i++) {
+
+                if (questions[i] === "hufflepuff-question-" + (i + 1)) {
+                    hufflepuff++;
+                } else if (questions[i] === "ravenclaw-question-" + (i + 1)) {
+                    ravenclaw++;
+                } else if (questions[i] === "slytherin-question-" + (i + 1)) {
+                    slytherin++;
+                } else if (questions[i] === "gryffindor-question-" + (i + 1)) {
+                    gryffindor++;
+                }
+
+            }
+            if (gryffindor >= slytherin && gryffindor >= ravenclaw && gryffindor >= hufflepuff) {
+                img.src = "https://m.media-amazon.com/images/I/81BpIbsbaWL._AC_UF894,1000_QL80_.jpg";
+            }
+            else if (slytherin >= gryffindor && slytherin >= ravenclaw && slytherin >= hufflepuff) {
+                img.src = "https://m.media-amazon.com/images/I/81mUqWd-q7L._AC_UF894,1000_QL80_.jpg";
+            }
+            else if (ravenclaw >= gryffindor && ravenclaw >= slytherin && ravenclaw >= hufflepuff) {
+                img.src = "https://m.media-amazon.com/images/I/71oSYjldfjL._AC_UF894,1000_QL80_.jpg";
+            }
+            else if (hufflepuff > gryffindor && hufflepuff > slytherin && hufflepuff > ravenclaw) {
+                img.src = "https://m.media-amazon.com/images/I/81aLUsl0qeL.jpg";
+            }
+        }
+    </script>
+
+</div>
+
+
+<div id="footer">
+    <p id="contacts"><b>Contacts:                       </b></p>
+    <p>email: ulyanaboykova49@gmail.com</p>
+    <p>phone: +1 (747) 291-5005        </p>
+</div>
+</body>
+</html>
