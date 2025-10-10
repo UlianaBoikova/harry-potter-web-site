@@ -731,7 +731,7 @@
 
     <script>
         function findYourHouse() {
-            // Проверяем, какая радиокнопка выбрана
+            // Checking which radio button is selected
             var selectedRadio1 = document.querySelector('input[name="question-1"]:checked');
             var selectedValue1 = selectedRadio1.value;
 
@@ -764,13 +764,14 @@
 
             var img = document.getElementById("resultImage");
             var total = 9;
+            // Response counters
             var gryffindor = 0;
             var slytherin = 0;
             var ravenclaw = 0;
             var hufflepuff = 0;
 
 
-            // Устанавливаем картинку в зависимости от выбранного значения
+            // Calculating the number of answers for each faculty
 
             for (let i = 0; i < 9; i++) {
 
@@ -785,6 +786,8 @@
                 }
 
             }
+
+            // Setting the image depending on the selected value
             if (gryffindor >= slytherin && gryffindor >= ravenclaw && gryffindor >= hufflepuff) {
                 img.src = "https://m.media-amazon.com/images/I/81BpIbsbaWL._AC_UF894,1000_QL80_.jpg";
             }

@@ -268,6 +268,8 @@
 </div>
 
 <script>
+
+    // Links to the images we need
     const cardsArray = [
         { name: 'card1', img: 'https://www.freeiconspng.com/uploads/harry-potter-logo-png-19.png' },
         { name: 'card2', img: 'https://static.vecteezy.com/system/resources/previews/010/988/017/non_2x/watercolor-witch-hat-clip-art-png.png' },
@@ -287,13 +289,14 @@
         { name: 'card16', img: 'https://www.pngkey.com/png/full/121-1215267_transparent-pixels-harry-potter-hogwarts-house-crests-pottermore.png' },
         { name: 'card17', img: 'https://c0.klipartz.com/pngpicture/429/358/gratis-png-harry-potter-y-las-reliquias-de-la-muerte-ron-weasley-harry-potter-y-la-piedra-filosofal-el-mundo-magico-de-harry-potter-harry-potter-thumbnail.png' },
         { name: 'card18', img: 'https://freepng.com/uploads/images/202308/harry-potter-hogwarts-silhouette-abstract-scenery_1020x-3253.jpg' },
-        // Добавьте остальные пары карт
+
     ];
 
     let firstCard = null;
     let secondCard = null;
     let lockBoard = false;
-    let matchedCards = 0;  // Счетчик совпавших карт
+    // Counter of matched cards
+    let matchedCards = 0;
 
     function createBoard() {
         const gameBoard = document.querySelector('.game-board');
@@ -318,23 +321,19 @@
         if (this === firstCard) return;
 
         this.classList.add('flipped');
-
-        // Включаем задержку, чтобы уменьшение прошло, и сразу увеличиваем
         setTimeout(() => {
             this.classList.add('show-img');
-        }, 500); // Пауза для завершения анимации уменьшения (500ms)
+        }, 500);
 
-        // Если это первая карта, запоминаем её
         if (!firstCard) {
             firstCard = this;
             return;
         }
 
-        // Если это вторая карта, проверяем на совпадение
         secondCard = this;
         setTimeout(() => {
             checkForMatch();
-        }, 500); // Проверка на совпадение после завершения анимации
+        }, 500);
     }
 
     function checkForMatch() {
@@ -342,10 +341,9 @@
             disableCards();
             matchedCards++;
             if (matchedCards === cardsArray.length) {
-                // Когда все карты найдены, показываем картинку с победой
                 setTimeout(() => {
                     showWinMessage();
-                }, 500);  // Небольшая задержка для завершения анимаций
+                }, 500);
             }
         } else {
             unflipCards();
@@ -377,10 +375,7 @@
         const gameBoard = document.querySelector('.game-board');
         const winMessage = document.querySelector('.win-message');
 
-        // Скрыть игровое поле
         gameBoard.classList.add('hidden');
-
-        // Показать сообщение о победе
         winMessage.classList.remove('hidden');
     }
 
