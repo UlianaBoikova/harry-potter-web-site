@@ -1,5 +1,6 @@
 package com.sitestart.blog.models;
 
+import jakarta.persistence.Lob;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
