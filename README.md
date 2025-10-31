@@ -31,6 +31,8 @@ This website also has a faculty placement test, and I used JavaScript to determi
 The final component of this website is a short memory game. In this game, you have to find a pair for each card. It's implemented using HTML, CSS, and JavaScript. 
 
 <img width="468" height="268" alt="image" src="https://github.com/user-attachments/assets/3d2ee102-86c1-4393-84ae-439e3236f540" />
+
 When you win, the game disappears and an animation appears on the screen along with a message stating that your faculty has won 10 points. 
+
 <img width="468" height="267" alt="image" src="https://github.com/user-attachments/assets/d7509da8-f1bd-48c9-80ad-38a84a68b67b" />
 
